@@ -11,7 +11,7 @@ export async function getAllQuiz(): Promise<Quiz[]> {
       throw new Error(`Failed to fetch quizzes: ${res.statusText}`);
     }
 
-    return await res.json();
+    return (await res.json()).quizess;
   } catch (error) {
     console.error("getAllQuiz error:", error);
     return [];
