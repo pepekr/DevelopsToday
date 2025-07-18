@@ -1,15 +1,20 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Login from './pages/Login';
-import Signin from './pages/SignIn';
-
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Signin from "./pages/SignIn";
+import Home from "./pages/Home";
+import AuthComponent from "./components/AuthComponent";
 
 function App() {
   return (
-   <Routes>
-    <Route element={<Login/>}/>
-    <Route element={<Signin/>}/>
-   </Routes>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/signin" element={<Signin />} />
+      <Route element = {<AuthComponent/>}>
+
+        <Route path="/" element={<Home />} />
+      </Route>
+    </Routes>
   );
 }
 
