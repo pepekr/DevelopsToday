@@ -10,5 +10,10 @@ export interface UserSignIn
 {
     email:string,
     password:string,
-    confirmedPassword:string
+    confirmedPassword?:string
+}
+export interface UserLogin
+{
+    email:string,
+    password:string,
 }
