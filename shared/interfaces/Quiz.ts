@@ -1,4 +1,4 @@
-import { Question } from "./Question";
+import { FullQuestion, Question } from "./Question";
 
 export interface Quiz {
     id: string;
@@ -6,7 +6,18 @@ export interface Quiz {
     name: string;
 }
 
+export interface QuizWithoutId
+{
+    userId:string,
+    name:string
+}
+
 export interface QuizWithQuestions extends Quiz  
 {
     questions: Question[]
+}
+export interface FullQuiz
+{
+    name:string,
+    questions:FullQuestion[]
 }

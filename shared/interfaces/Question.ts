@@ -8,3 +8,9 @@ export interface QuestionWithAnswers extends Question
 {
     answers: Answer[]
 }
+
+export interface FullQuestion
+{
+    question:string,
+    answers: Answer[]
+}
