@@ -18,7 +18,10 @@ export interface QuizWithQuestions extends Quiz
 }
 export interface FullQuiz
 {
-    numberOfQuestions:number,
     name:string,
     questions:FullQuestion[]
+}
+export interface FullQuizWithNumber extends FullQuiz
+{
+    numberOfQuestions:number
 }
