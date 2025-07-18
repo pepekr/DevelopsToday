@@ -2,8 +2,15 @@ import { Response, Request } from "express";
 import { FullQuiz } from "../../../shared/interfaces/Quiz.js";
 import { QuizService } from "Services/QuizService.js";
 import { PrismaQuizRepository } from "DataLayer/PrismaQuizRepository.js";
-const prisma = new PrismaQuizRepository();
-const quizService = new QuizService(prisma);
+import { PrismaQuestionRepository } from "DataLayer/PrismaQuestionRepository.js";
+import { QuestionService } from "Services/QuestionService.js";
+
+const prismaQuiz = new PrismaQuizRepository();
+const quizService = new QuizService(prismaQuiz);
+
+const prismaQuestion = new PrismaQuestionRepository();
+const questionService = new QuestionService(prismaQuestion);
+
 export async function CreateFullQuiz(req: Request, res: Response) {
   const quiz: FullQuiz = req.body;
   const userId: string = res.locals.userId;
@@ -26,7 +33,14 @@ export async function CreateFullQuiz(req: Request, res: Response) {
       name: quiz.name,
       userId: userId,
     });
-    // pass then to creating questions and answers 
+    const promiseQuestions = quiz.questions.map(async (q)=>{
+      return await questionService.create({
+        question:q.question,
+        quizId:id
+      })
+    });
+    const questions = await Promise.all(promiseQuestions)
+    // for each question create ansewers
   } catch (error) {}
 
   return res.status(201).json({ quiz });
