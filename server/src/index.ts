@@ -7,6 +7,7 @@ import {
   getAllQuizes,
   getFullQuiz,
 } from "Controllers/QuizController.js";
+import cors from "cors"
 import { login, signin } from "Controllers/AuthController.js";
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -18,7 +19,10 @@ const PORT = process.env.PORT || 3001;
 
 app.use(cookieParser());
 app.use(express.json());
-
+app.use(cors({
+  origin: 'http://localhost:3000', 
+  credentials: true              
+}));
 app.get("/", (_req, res) => {
   res.send("Hello, world!");
 });
