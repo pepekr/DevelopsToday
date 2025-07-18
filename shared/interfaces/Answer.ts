@@ -4,3 +4,9 @@ export interface Answer {
     answer: string;
     isCorrect: boolean;
 }
+export interface AnswerWithoutId
+{
+    questionId: string;
+    answer: string;
+    isCorrect: boolean;
+}
