@@ -29,7 +29,6 @@ export default function Signin() {
       setSigninError(error.message || "Signin failed");
     } else {
       navigate('/')
-      setIsAuthenticated(true)
     }
   };
 

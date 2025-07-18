@@ -28,7 +28,6 @@ export default function Login() {
       const error = await res.json();
       setLoginError(error.message || "Login failed");
     } else {
-      setIsAuthenticated(true);
       navigate('/')
     }
   };
