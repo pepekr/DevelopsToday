@@ -1,0 +1,67 @@
+.signin-container {
+  width: 320px;
+  margin: 50px auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  text-align: left;
+}
+
+.signin-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.signin-group {
+  margin-bottom: 18px;
+}
+
+.signin-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+.signin-group input {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.signin-group input:focus {
+  outline: none;
+  border-color: #0077cc;
+  box-shadow: 0 0 3px rgba(0, 119, 204, 0.5);
+}
+
+.signin-error {
+  color: #d32f2f;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Buttons specifically inside the signin-container form */
+.signin-container form button.signin-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 5px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.signin-container form button.signin-button:hover {
+  background-color: #005fa3;
+}
