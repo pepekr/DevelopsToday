@@ -5,5 +5,5 @@ export interface IQuizRepository
     create(quiz:QuizWithoutId):Promise<Quiz>
     delete(id:string):Promise<Quiz>
     findByUserId(id:string):Promise<Quiz[]>
-    findFullByUserId(id:string):Promise<FullQuiz[]>
+    findFullByQuizId(id:string):Promise<FullQuiz|null>
 }
