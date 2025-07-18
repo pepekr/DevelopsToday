@@ -73,10 +73,33 @@ export async function getAllQuizes(req: Request, res: Response) {
 export async function getFullQuiz(req:Request, res:Response)
 {
   try {
+    const quizId = req.params.id
+    if(!quizId) res.status(401).json({error:"No id given"})
     const userId:string = res.locals.userId;
     const quiz = quizService.findFullByQuizId(userId);
     res.status(200).json({quiz})
   } catch (error) {
         res.status(500).json({error:"Error occured during quizess gathering"})
   } 
+}
+export async function deleteQuiz(req:Request, res:Response)
+{
+   const quizId = req.params.id
+   if(!quizId) res.status(401).json({error:"No id given"})
+   const userId:string = res.locals.userId;
+   const quiz = await quizService.findFullByQuizId(quizId)
+   if(!quiz) return res.status(401).json({error:"Quiz not found"})
+  //@ts-ignore
+   if(!quiz.userId === userId)
+    {
+      return res.status(401).json({error:"Quiz not found"})
+    }
+    try {
+      await quizService.delete(quizId)
+      res.status(200).json({message:"Quiz deleted"})
+    } catch (error) {
+      res.status(500).json({error:"Something went wrong"})
+    }
+    
+  
 }
