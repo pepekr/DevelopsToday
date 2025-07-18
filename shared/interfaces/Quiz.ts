@@ -18,6 +18,7 @@ export interface QuizWithQuestions extends Quiz
 }
 export interface FullQuiz
 {
+    numberOfQuestions:number,
     name:string,
     questions:FullQuestion[]
 }
