@@ -62,7 +62,7 @@ export async function CreateFullQuiz(req: Request, res: Response) {
 export async function getAllQuizes(req: Request, res: Response) {
   try {
     const userId: string = res.locals.userId;
-    const quizess = quizService.findByUserId(userId);
+    const quizess = await quizService.findByUserId(userId);
     res.status(200).json({quizess})
   } catch (error) {
     res.status(500).json({error:"Error occured during quizess gathering"})
