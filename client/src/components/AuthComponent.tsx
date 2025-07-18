@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { Navbar } from './Navbar';
 
 function AuthComponent() {
   const [isAuth, setIsAuth] = useState<boolean|null>(null)
@@ -31,7 +32,7 @@ if(isAuth === null)
     return <>Loading</>
   }
   return (
-   isAuth?<Outlet/>:<Navigate to="/login" replace />
+   isAuth?<><Navbar/> <Outlet/></>:<Navigate to="/login" replace />
   )
 }
 
