@@ -4,6 +4,12 @@ export interface Question {
     quizId: string;
     question: string;
 }
+
+export interface QuestionWithoutId
+{
+    quizId:string,
+    question:string
+}
 export interface QuestionWithAnswers extends Question
 {
     answers: Answer[]
