@@ -1,14 +1,14 @@
 import { IQuizRepository } from "../../../shared/interfaces/IQuizRepozitory.js";
-import { Quiz } from "../../../shared/interfaces/Quiz.js";
+import { Quiz, QuizWithoutId } from "../../../shared/interfaces/Quiz.js";
 import prisma from "./prismaClient.js"
 export class PrismaQuizRepository implements IQuizRepository
 {
-    async findbyUserId(userId: string): Promise<Quiz[]> {
+    async findByUserId(userId: string): Promise<Quiz[]> {
         return prisma.quiz.findMany({
             where: { userId }
         });
     }
-    async create(quiz:Quiz): Promise<Quiz> {
+    async create(quiz:QuizWithoutId): Promise<Quiz> {
         return prisma.quiz.create({data:
             {
                 name:quiz.name,

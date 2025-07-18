@@ -1,8 +1,8 @@
-import { Quiz, QuizWithQuestions } from "./Quiz";
+import { Quiz, QuizWithoutId } from "./Quiz";
 
 export interface IQuizRepository 
 {
-    create(quiz:Quiz):Promise<Quiz>
+    create(quiz:QuizWithoutId):Promise<Quiz>
     delete(id:string):Promise<Quiz>
-    findbyUserId(id:string):Promise<Quiz[]>
+    findByUserId(id:string):Promise<Quiz[]>
 }
