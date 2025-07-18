@@ -7,6 +7,7 @@ import {
   getAllQuizes,
   getFullQuiz,
 } from "Controllers/QuizController.js";
+import { login, signin } from "Controllers/AuthController.js";
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -34,7 +35,26 @@ app.get("/quizzes/:id", tokenCheck, async (req, res) => {
 app.delete("quizzess/:id", tokenCheck, async (req, res) => {
   await deleteQuiz(req, res);
 });
+app.post("/login", async (req, res) => {
+  await login(req, res);
+});
+app.post("/signin", async (req, res) => {
+  await signin(req, res);
+});
+app.post("/logout", (req, res) => {
+  res.clearCookie("access-token");
+  res.clearCookie("refresh-token");
+  res.status(200).send();
+});
 
+app.get("/verify", tokenCheck, (req, res) => {
+  const { "access-token": accessToken, "refresh-token": refreshToken } =
+    req.cookies || {};
+  if (accessToken || refreshToken) {
+    return res.sendStatus(200);
+  }
+  return res.sendStatus(401);
+});
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
