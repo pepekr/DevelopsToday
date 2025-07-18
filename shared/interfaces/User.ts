@@ -6,3 +6,9 @@ export interface UserWithCreds extends User
 {
     password:string
 }
+export interface UserSignIn
+{
+    email:string,
+    password:string,
+    confirmedPassword:string
+}
