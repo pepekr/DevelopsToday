@@ -4,6 +4,7 @@ export interface Quiz {
     id: string;
     userId: string;
     name: string;
+    numberOfQuestions?: string;
 }
 
 export interface QuizWithoutId

@@ -7,6 +7,9 @@ import AuthComponent from "./components/AuthComponent";
 
 function App() {
   return (
+    <body className="h-screen">
+      
+    
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signin" element={<Signin />} />
@@ -15,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
       </Route>
     </Routes>
+    </body>
   );
 }
 

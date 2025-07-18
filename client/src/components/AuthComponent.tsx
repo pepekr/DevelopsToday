@@ -10,7 +10,6 @@ function AuthComponent() {
         const res = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/verify`, {
           credentials: "include",
         });
-        console.log(res)
         if(res.ok)
           {
             setIsAuth(true)
