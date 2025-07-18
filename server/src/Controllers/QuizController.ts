@@ -58,3 +58,25 @@ export async function CreateFullQuiz(req: Request, res: Response) {
 
   return res.status(201).json({ quiz });
 }
+
+export async function getAllQuizes(req: Request, res: Response) {
+  try {
+    const userId: string = res.locals.userId;
+    const quizess = quizService.findByUserId(userId);
+    res.status(200).json({quizess})
+  } catch (error) {
+    res.status(500).json({error:"Error occured during quizess gathering"})
+  }
+  
+}
+
+export async function getFullQuiz(req:Request, res:Response)
+{
+  try {
+    const userId:string = res.locals.userId;
+    const quiz = quizService.findFullByQuizId(userId);
+    res.status(200).json({quiz})
+  } catch (error) {
+        res.status(500).json({error:"Error occured during quizess gathering"})
+  } 
+}

@@ -16,8 +16,8 @@ export default async function tokenCheck(req: Request, res: Response, next: Next
     const userData = tokenCheckResult.user; 
 
     if (userData) {
-        res.locals.user_id = userData.id;
-        res.locals.user_gmail = userData.email;
+        res.locals.userId = userData.id;
+        res.locals.userEmail = userData.email;
     }
 
 

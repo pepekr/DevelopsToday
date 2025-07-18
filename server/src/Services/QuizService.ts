@@ -12,6 +12,10 @@ export class QuizService
     {
         return this.quizRepo.findByUserId(id)
     }
+    findFullByQuizId(id:string)
+    {
+        return this.quizRepo.findFullByQuizId(id)
+    }
     async create(qiuz:QuizWithoutId)
     {
         return this.quizRepo.create(qiuz)

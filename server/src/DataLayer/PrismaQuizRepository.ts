@@ -22,9 +22,9 @@ export class PrismaQuizRepository implements IQuizRepository {
   async delete(id: string): Promise<Quiz> {
     return prisma.quiz.delete({ where: { id: id } });
   }
-  async findFullByUserId(userId: string): Promise<FullQuiz[]> {
-    return prisma.quiz.findMany({
-      where: { userId: userId },
+  async findFullByQuizId(quizId: string): Promise<FullQuiz | null> {
+    return prisma.quiz.findUnique({
+      where: { id: quizId },
       include: { questions: { include: { answers: true } } },
     });
   }
