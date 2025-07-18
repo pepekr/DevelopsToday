@@ -3,7 +3,7 @@ import { useSigninForm } from "../hooks/useSignInHook"
 import '../styles/signin.css';
 import { useNavigate } from 'react-router';
 
-export default function Signin({setIsAuthenticated}:{setIsAuthenticated:React.Dispatch<React.SetStateAction<boolean>>}) {
+export default function Signin() {
   const navigate = useNavigate();
   const [signinError, setSigninError] = useState<string>("");
 
