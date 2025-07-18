@@ -16,6 +16,7 @@ export class PrismaQuizRepository implements IQuizRepository {
       data: {
         name: quiz.name,
         userId: quiz.userId,
+        numberOfQuestions: quiz.numberOfQuestions || 0
       },
     });
   }

@@ -4,13 +4,14 @@ export interface Quiz {
     id: string;
     userId: string;
     name: string;
-    numberOfQuestions?: string;
+    numberOfQuestions?: number;
 }
 
 export interface QuizWithoutId
 {
     userId:string,
     name:string
+    numberOfQuestions?:number
 }
 
 export interface QuizWithQuestions extends Quiz  

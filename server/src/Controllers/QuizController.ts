@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import { FullQuiz } from "../../../shared/interfaces/Quiz.js";
+import { FullQuiz, FullQuizWithNumber } from "../../../shared/interfaces/Quiz.js";
 import { QuizService } from "Services/QuizService.js";
 import { PrismaQuizRepository } from "DataLayer/PrismaQuizRepository.js";
 import { PrismaQuestionRepository } from "DataLayer/PrismaQuestionRepository.js";
@@ -17,7 +17,7 @@ const prismaAnswer = new PrismaAnswerRepository();
 const answerService = new AnswerService(prismaAnswer);
 
 export async function CreateFullQuiz(req: Request, res: Response) {
-  const quiz: FullQuiz = req.body;
+  const quiz: FullQuizWithNumber = req.body;
   const userId: string = res.locals.userId;
   if (!userId) return res.status(400).json({ error: "Missing credentials" });
   if (
@@ -37,6 +37,7 @@ export async function CreateFullQuiz(req: Request, res: Response) {
     const { id } = await quizService.create({
       name: quiz.name,
       userId: userId,
+      numberOfQuestions:quiz.numberOfQuestions
     });
     const promiseAnswerAndQuestions = quiz.questions.map(async (q) => {
       const question = await questionService.create({
