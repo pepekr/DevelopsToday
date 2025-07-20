@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useQuizHook } from "../hooks/useQuizHook";
+import MessageComponent from "../components/MessageComponent";
 
 export default function QuizForm() {
   const {
@@ -15,16 +16,20 @@ export default function QuizForm() {
     removeAnswer,
     handleSubmit,
     handleLastAnswerChange,
+    message,
+    setMessage,
   } = useQuizHook();
 
   const MAX_QUESTIONS = 100;
   const MAX_ANSWERS = 4;
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 p-6 max-w-4xl mx-auto">
-      <div>
-        <label className="block font-semibold mb-1">Quiz Name:</label>
-        <input
-          type="text"
+    <>
+      {message && <MessageComponent message={message} setMessage={setMessage} />}
+      <form onSubmit={handleSubmit} className="space-y-6 p-6 max-w-4xl mx-auto">
+        <div>
+          <label className="block font-semibold mb-1">Quiz Name:</label>
+          <input
+            type="text"
           value={quizName}
           onChange={(e) => setQuizName(e.target.value)}
           className="border p-2 w-full rounded"
@@ -116,5 +121,6 @@ export default function QuizForm() {
         </button>
       </div>
     </form>
+    </>
   );
 }

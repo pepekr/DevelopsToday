@@ -90,7 +90,7 @@ export function useQuizHook() {
       questions:questions,
       numberOfQuestions: questions.length,
     };
-    const result = await fetch("/quizzes", {
+    const result = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/quizzes`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -98,6 +98,7 @@ export function useQuizHook() {
         },  
         body: JSON.stringify(quiz),
     });
+    console.log(result.body);
     result.ok? setMessage("Quiz created successfully!") : setMessage("Error creating quiz.");
   };
 
@@ -115,5 +116,6 @@ export function useQuizHook() {
     handleSubmit,
     handleLastAnswerChange,
     message,
+    setMessage,
   };
 }
