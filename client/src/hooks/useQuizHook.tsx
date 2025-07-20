@@ -115,5 +115,6 @@ export function useQuizHook() {
     handleSubmit,
     handleLastAnswerChange,
     message,
+    setMessage,
   };
 }
