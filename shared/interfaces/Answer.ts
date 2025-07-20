@@ -10,3 +10,7 @@ export interface AnswerWithoutId
     answer: string;
     isCorrect: boolean;
 }
+export interface SimpleAnswer{
+    answer: string;
+    isCorrect: boolean;
+}

@@ -1,4 +1,4 @@
-import { Answer } from "./Answer";
+import { Answer, SimpleAnswer } from "./Answer";
 export interface Question {
     id: string;
     quizId: string;
@@ -18,5 +18,5 @@ export interface QuestionWithAnswers extends Question
 export interface FullQuestion
 {
     question:string,
-    answers: Answer[]
+    answers: SimpleAnswer[]
 }

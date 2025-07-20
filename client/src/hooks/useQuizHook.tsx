@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { FullQuizWithNumber } from "../../../shared/interfaces/Quiz";
 
 export function useQuizHook() {
   const MAX_QUESTIONS = 100;
   const MAX_ANSWERS = 4;
   const [quizName, setQuizName] = useState("");
+  const [message, setMessage] = useState<string | null>(null);
   const [questions, setQuestions] = useState([
     {
       question: "",
@@ -25,7 +27,8 @@ export function useQuizHook() {
 
   const handleCorrectChange = (qIndex: number, aIndex: number) => {
     const updated = [...questions];
-    updated[qIndex].answers[aIndex].isCorrect = !updated[qIndex].answers[aIndex].isCorrect;
+    updated[qIndex].answers[aIndex].isCorrect =
+      !updated[qIndex].answers[aIndex].isCorrect;
     setQuestions(updated);
   };
 
@@ -47,7 +50,10 @@ export function useQuizHook() {
   const addAnswer = (qIndex: number) => {
     const updated = [...questions];
     if (updated[qIndex].answers.length < MAX_ANSWERS) {
-      updated[qIndex].answers.push({ answer: "", isCorrect: updated[qIndex].answers.length === 0 });
+      updated[qIndex].answers.push({
+        answer: "",
+        isCorrect: updated[qIndex].answers.length === 0,
+      });
       setQuestions(updated);
     }
   };
@@ -59,31 +65,40 @@ export function useQuizHook() {
   };
 
   const handleLastAnswerChange = (qIndex: number) => {
-  setQuestions(prev => {
-    const updated = [...prev];
-    const q = updated[qIndex];
+    setQuestions((prev) => {
+      const updated = [...prev];
+      const q = updated[qIndex];
 
-    updated[qIndex] = {
-      ...q,
-      answers: [
-        {
-          ...q.answers[0],
-          isCorrect: true,
-        },
-      ],
-    };
+      updated[qIndex] = {
+        ...q,
+        answers: [
+          {
+            ...q.answers[0],
+            isCorrect: true,
+          },
+        ],
+      };
 
-    return updated;
-  });
-};
+      return updated;
+    });
+  };
 
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const quiz = {
+    const quiz: FullQuizWithNumber = {
       name: quizName,
-      questions,
+      questions:questions,
+      numberOfQuestions: questions.length,
     };
+    const result = await fetch("/quizzes", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },  
+        body: JSON.stringify(quiz),
+    });
+    result.ok? setMessage("Quiz created successfully!") : setMessage("Error creating quiz.");
   };
 
   return {
@@ -99,5 +114,6 @@ export function useQuizHook() {
     removeAnswer,
     handleSubmit,
     handleLastAnswerChange,
-  }
+    message,
+  };
 }
