@@ -1,15 +1,21 @@
 import React from "react";
 import useSingleQuizInfo from "../hooks/useSingleQuizInfo";
+import TestMode from "../components/TestMode";
 
 function Quiz() {
   const { quizInfo, error } = useSingleQuizInfo();
   const [isCorrectVisible, setIsCorrectVisible] = React.useState(false);
+  const [isTestMode, setIsTestMode] = React.useState(false);
   if (!quizInfo) {
     return <div className="text-center mt-10 text-gray-500">Loading...</div>;
   }
 
   if (error) {
     return <div className="text-center text-red-500 mt-10">Error: {error}</div>;
+  }
+
+  if (isTestMode) {
+    return <TestMode questions={quizInfo.questions} />;
   }
 
   return (
@@ -20,7 +26,7 @@ function Quiz() {
       </h1>
       <div>
       <button className="bg-blue-500 hover:bg-blue-600 transition duration-200 text-white font-medium rounded-md px-4 mx-1 py-2">Quiz Mode</button>
-      <button className="bg-gray-300 hover:bg-gray-400 transition duration-200 text-gray-800 font-medium rounded-md px-4 mx-1 py-2">Test mode</button>
+      <button onClick={() => setIsTestMode(true)} className="bg-gray-300 hover:bg-gray-400 transition duration-200 text-gray-800 font-medium rounded-md px-4 mx-1 py-2">Test mode</button>
       </div>
       </div>
       {quizInfo.questions.map((question, index) => (
