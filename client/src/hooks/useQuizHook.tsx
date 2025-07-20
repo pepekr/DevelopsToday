@@ -98,7 +98,6 @@ export function useQuizHook() {
         },  
         body: JSON.stringify(quiz),
     });
-    console.log(result.body);
     result.ok? setMessage("Quiz created successfully!") : setMessage("Error creating quiz.");
   };
 
