@@ -16,7 +16,6 @@ export async function manageLogin(body:UserLogin)
     if(!match) return {error: "Wrong credentials", status:401}
     const accessExpiration = 15 * 60 //seconds
     const refreshExpiration = 30 * 24 * 60 * 60
-    console.log("Creating token")
     const refreshToken = createToken({id:dbUser.id.toString(), email:dbUser.email}, refreshExpiration)
     const accessToken = createToken({id:dbUser.id.toString(), email:dbUser.email},accessExpiration)
     if(!refreshToken || !accessToken) return {error:"Couldnt create token"}

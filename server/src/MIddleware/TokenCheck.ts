@@ -4,7 +4,6 @@ import validateToken from "../Services/VerifyTokenService.js"
 export default async function tokenCheck(req: Request, res: Response, next: NextFunction) {
     const cookies = req.cookies;    
     const tokenCheckResult = await validateToken(cookies);
-    console.log(tokenCheckResult)
     if (tokenCheckResult.error) {
         res.clearCookie("access-token");
         res.clearCookie("refresh-token");
