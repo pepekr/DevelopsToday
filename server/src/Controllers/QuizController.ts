@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import { FullQuiz, FullQuizWithNumber } from "../../../shared/interfaces/Quiz.js";
+import { SimpleQuiz, SimpleQuizWithNumber } from "../../../shared/interfaces/Quiz.js";
 import { QuizService } from "Services/QuizService.js";
 import { PrismaQuizRepository } from "DataLayer/PrismaQuizRepository.js";
 import { PrismaQuestionRepository } from "DataLayer/PrismaQuestionRepository.js";
@@ -17,7 +17,7 @@ const prismaAnswer = new PrismaAnswerRepository();
 const answerService = new AnswerService(prismaAnswer);
 
 export async function CreateFullQuiz(req: Request, res: Response) {
-  const quiz: FullQuizWithNumber = req.body;
+  const quiz: SimpleQuizWithNumber = req.body;
   const userId: string = res.locals.userId;
   if (!userId) return res.status(400).json({ error: "Missing credentials" });
   if (

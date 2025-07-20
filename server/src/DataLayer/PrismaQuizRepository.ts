@@ -1,6 +1,6 @@
 import { IQuizRepository } from "../../../shared/interfaces/IQuizRepozitory.js";
 import {
-  FullQuiz,
+  SimpleQuiz,
   Quiz,
   QuizWithoutId,
 } from "../../../shared/interfaces/Quiz.js";
@@ -23,7 +23,7 @@ export class PrismaQuizRepository implements IQuizRepository {
   async delete(id: string): Promise<Quiz> {
     return prisma.quiz.delete({ where: { id: id } });
   }
-  async findFullByQuizId(quizId: string): Promise<FullQuiz | null> {
+  async findFullByQuizId(quizId: string): Promise<SimpleQuiz | null> {
     return prisma.quiz.findUnique({
       where: { id: quizId },
       include: { questions: { include: { answers: true } } },

@@ -15,7 +15,7 @@ export interface QuestionWithAnswers extends Question
     answers: Answer[]
 }
 
-export interface FullQuestion
+export interface SimpleQuestion
 {
     question:string,
     answers: SimpleAnswer[]
