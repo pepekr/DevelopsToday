@@ -1,4 +1,4 @@
-import { SimpleQuestion, Question } from "./Question";
+import { SimpleQuestion, Question, QuestionWithAnswers } from "./Question";
 
 export interface Quiz {
     id: string;
@@ -7,6 +7,10 @@ export interface Quiz {
     numberOfQuestions?: number;
 }
 
+export interface FullQuiz extends Quiz 
+{
+    questions: QuestionWithAnswers[]
+}
 
 export interface QuizWithoutId
 {
