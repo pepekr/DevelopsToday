@@ -5,6 +5,7 @@ import Signin from "./pages/SignIn";
 import Home from "./pages/Home";
 import AuthComponent from "./components/AuthComponent";
 import Create from "./pages/Create";
+import Quiz from "./pages/Quiz";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route element = {<AuthComponent/>}>
         <Route path="/create" element={<Create />} />
         <Route path="/" element={<Home />} />
+        <Route path="quizzes/:id" element={<Quiz />} />
       </Route>
     </Routes>
   );

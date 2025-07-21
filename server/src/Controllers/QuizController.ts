@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import { FullQuiz, FullQuizWithNumber } from "../../../shared/interfaces/Quiz.js";
+import { SimpleQuiz, SimpleQuizWithNumber } from "../../../shared/interfaces/Quiz.js";
 import { QuizService } from "Services/QuizService.js";
 import { PrismaQuizRepository } from "DataLayer/PrismaQuizRepository.js";
 import { PrismaQuestionRepository } from "DataLayer/PrismaQuestionRepository.js";
@@ -17,7 +17,7 @@ const prismaAnswer = new PrismaAnswerRepository();
 const answerService = new AnswerService(prismaAnswer);
 
 export async function CreateFullQuiz(req: Request, res: Response) {
-  const quiz: FullQuizWithNumber = req.body;
+  const quiz: SimpleQuizWithNumber = req.body;
   const userId: string = res.locals.userId;
   if (!userId) return res.status(400).json({ error: "Missing credentials" });
   if (
@@ -77,7 +77,10 @@ export async function getFullQuiz(req:Request, res:Response)
     const quizId = req.params.id
     if(!quizId) res.status(401).json({error:"No id given"})
     const userId:string = res.locals.userId;
-    const quiz = quizService.findFullByQuizId(userId);
+
+    const quiz = await quizService.findFullByQuizId(quizId);
+    if(!quiz) return res.status(401).json({error:"Quiz not found"})
+    if(quiz.userId !== userId)  return res.status(401).json({error:"Quiz not found"})
     res.status(200).json({quiz})
   } catch (error) {
         res.status(500).json({error:"Error occured during quizess gathering"})

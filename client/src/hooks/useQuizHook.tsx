@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FullQuizWithNumber } from "../../../shared/interfaces/Quiz";
+import { SimpleQuizWithNumber } from "../../../shared/interfaces/Quiz";
 
 export function useQuizHook() {
   const MAX_QUESTIONS = 100;
@@ -85,7 +85,7 @@ export function useQuizHook() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const quiz: FullQuizWithNumber = {
+    const quiz: SimpleQuizWithNumber = {
       name: quizName,
       questions:questions,
       numberOfQuestions: questions.length,
@@ -98,7 +98,6 @@ export function useQuizHook() {
         },  
         body: JSON.stringify(quiz),
     });
-    console.log(result.body);
     result.ok? setMessage("Quiz created successfully!") : setMessage("Error creating quiz.");
   };
 

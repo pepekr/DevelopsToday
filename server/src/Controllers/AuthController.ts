@@ -11,7 +11,6 @@ export async function login(req:Request, res:Response)
     }
     if(!loginRes.accessToken || !loginRes.refreshToken) 
         return res.status(loginRes.status || 500).send(JSON.stringify("Something went wrong durin authentiaction"))
-    console.log("setting access token")
     res.cookie("access-token", loginRes.accessToken, {
         httpOnly:true,
         expires: new Date(Date.now() + (15*60000)),
