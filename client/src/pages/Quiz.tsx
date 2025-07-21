@@ -15,7 +15,7 @@ function Quiz() {
   }
 
   if (isTestMode) {
-    return <TestMode questions={quizInfo.questions} />;
+    return <TestMode questions={quizInfo.questions} setIsTestMode={setIsTestMode} />;
   }
 
   return (
