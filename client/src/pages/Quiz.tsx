@@ -1,11 +1,13 @@
 import React from "react";
 import useSingleQuizInfo from "../hooks/useSingleQuizInfo";
 import TestMode from "../components/TestMode";
+import QuizMode from "../components/QuizMode";
 
 function Quiz() {
   const { quizInfo, error } = useSingleQuizInfo();
   const [isCorrectVisible, setIsCorrectVisible] = React.useState(false);
   const [isTestMode, setIsTestMode] = React.useState(false);
+  const [isQuizMode, setIsQuizMode] = React.useState(false);
   if (!quizInfo) {
     return <div className="text-center mt-10 text-gray-500">Loading...</div>;
   }
@@ -15,19 +17,39 @@ function Quiz() {
   }
 
   if (isTestMode) {
-    return <TestMode questions={quizInfo.questions} setIsTestMode={setIsTestMode} />;
+    return (
+      <TestMode questions={quizInfo.questions} setIsTestMode={setIsTestMode} />
+    );
+  }
+  if (isQuizMode) {
+    return (
+      <QuizMode
+        questionsNotFiltered={quizInfo.questions}
+        setIsQuizMode={setIsQuizMode}
+      />
+    );
   }
 
   return (
     <div className="max-w-3xl mx-auto p-6">
       <div className="flex items-center justify-between mx-4 mb-2">
-      <h1 className="text-3xl font-bold text-center text-blue-600">
-        {quizInfo.name}
-      </h1>
-      <div>
-      <button className="bg-blue-500 hover:bg-blue-600 transition duration-200 text-white font-medium rounded-md px-4 mx-1 py-2">Quiz Mode</button>
-      <button onClick={() => setIsTestMode(true)} className="bg-gray-300 hover:bg-gray-400 transition duration-200 text-gray-800 font-medium rounded-md px-4 mx-1 py-2">Test mode</button>
-      </div>
+        <h1 className="text-3xl font-bold text-center text-blue-600">
+          {quizInfo.name}
+        </h1>
+        <div>
+          <button
+            onClick={() => setIsQuizMode(true)}
+            className="bg-blue-500 hover:bg-blue-600 transition duration-200 text-white font-medium rounded-md px-4 mx-1 py-2"
+          >
+            Quiz Mode
+          </button>
+          <button
+            onClick={() => setIsTestMode(true)}
+            className="bg-gray-300 hover:bg-gray-400 transition duration-200 text-gray-800 font-medium rounded-md px-4 mx-1 py-2"
+          >
+            Test mode
+          </button>
+        </div>
       </div>
       {quizInfo.questions.map((question, index) => (
         <div
