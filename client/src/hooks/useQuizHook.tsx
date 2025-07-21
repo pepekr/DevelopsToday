@@ -85,20 +85,45 @@ export function useQuizHook() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    questions.forEach((q) => {
+      if (q.answers.length === 1) {
+        q.answers[0].isCorrect = true;
+      }
+    });
     const quiz: SimpleQuizWithNumber = {
       name: quizName,
-      questions:questions,
+      questions: questions,
       numberOfQuestions: questions.length,
     };
-    const result = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/quizzes`, {
+    const invalidQuestionIndex = questions.findIndex(
+      (q) => !q.answers.some((a) => a.isCorrect)
+    );
+    if (invalidQuestionIndex !== -1) {
+      setMessage(
+        `Please select at least one correct answer in question #${
+          invalidQuestionIndex + 1
+        }.`
+      );
+      return;
+    }
+    if (quizName.trim() === "") {
+      setMessage("Quiz name cannot be empty.");
+      return;
+    }
+    const result = await fetch(
+      `${process.env.REACT_APP_BACKEND_API_URL}/quizzes`,
+      {
         method: "POST",
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
-        },  
+        },
         body: JSON.stringify(quiz),
-    });
-    result.ok? setMessage("Quiz created successfully!") : setMessage("Error creating quiz.");
+      }
+    );
+    result.ok
+      ? setMessage("Quiz created successfully!")
+      : setMessage("Error creating quiz.");
   };
 
   return {
